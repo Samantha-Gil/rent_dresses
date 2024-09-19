@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('dresses', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Category::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->string('name');
+            $table->string('slug')->unique();
             $table->decimal('price', 8, 2);
             $table->text('description');
             $table->timestamps();
