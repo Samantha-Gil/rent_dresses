@@ -19,7 +19,8 @@ class RentFactory extends Factory
     {
         return [
             'customer_id'=> Customer::inRandomOrder()->first()->id,
-            'dress_id'=> Dress::inRandomOrder()->first()->id
+            'dress_id'=> Dress::inRandomOrder()->first()->id,
+            'amount' =>fake()->randomFloat(2, 100, 999.99)
         ];
     }
 }

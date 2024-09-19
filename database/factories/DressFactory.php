@@ -17,8 +17,10 @@ class DressFactory extends Factory
     public function definition(): array
     {
         return [
-            'category_id'=> Category::inRandomOrder()->first()->id, //Assign a random id from table categories
-            'price' => fake()->randomFloat(2, 100, 999.99), //2 decimal places, 100 minimum value, 999.99 maximum value
+            'category_id'=> Category::inRandomOrder()->first()->id,
+            'name' =>fake()->name(),
+            'slug' => fake()->slug(),
+            'price' => fake()->randomFloat(2, 100, 999.99),
             'description'=> fake()->sentence()
         ];
     }
