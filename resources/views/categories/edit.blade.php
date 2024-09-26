@@ -7,15 +7,15 @@
         @method("PUT")
         <label>
             Nombre:<br>
-            <input type="text" name="name" value="{{$category->name}}">
+            <input type="text" name="name" value="{{old('name', $category->name)}}">
         </label><br>
         <label>
             Slug:<br>
-            <input type="text" name="slug" required value="{{$category->slug}}">
+            <input type="text" readonly name="slug" required value="{{$category->slug}}">
         </label><br>
         <label>
             Descripción:<br>
-            <textarea name="description" rows="5">{{$category->description}}></textarea>
+            <textarea name="description" rows="5">{{old('description', $category->description)}}</textarea>
         </label><br>
         <button type="submit">Modificar</button>
     </form>

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreRequest;
-use App\Http\Requests\UpdateRequest;
+use App\Http\Requests\Categories\StoreRequest;
+use App\Http\Requests\Categories\UpdateRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Exception;
@@ -67,8 +67,9 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Category $category)
     {
-        
+        $category->delete();
+        return redirect()->route('categories.index');
     }
 }

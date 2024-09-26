@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Categories;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Support\Str;
 class StoreRequest extends FormRequest
 {
     /**
@@ -24,7 +24,14 @@ class StoreRequest extends FormRequest
         return [
             'name' => "required|string|max:255",
             'slug' => "required_with:name|string|max:255|unique:categories,slug",
-            'description' => "required|min:10"
+            'description' => "required|string|min:10"
         ];
+    }
+    protected function prepareForValidation()
+    { 
+        $this->merge([ //Add or modify data
+            'slug' => Str::slug($this->name),
+        ]);
+        
     }
 }

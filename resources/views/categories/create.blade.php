@@ -6,15 +6,11 @@
         @csrf
         <label>
             Nombre:<br>
-            <input type="text" name="name">
-        </label><br>
-        <label>
-            Slug:<br>
-            <input type="text" name="slug" required>
+            <input type="text" name="name" value="{{old('name')}}">
         </label><br>
         <label>
             Descripción:<br>
-            <textarea name="description" rows="5"></textarea>
+            <textarea name="description" rows="5">{{old('description')}}</textarea>
         </label><br>
         <button type="submit">Registrar</button>
     </form>

@@ -7,7 +7,11 @@
     <p>Descripción: {{ $category->description }}</p>
     <a href="{{route('categories.index')}}">Volver a categorias</a>
     <br>
-    <a href="{{route('categories.edit', $category)}}">Modificar categoria</a>
+    <a href="{{route('categories.edit', $category)}}">Modificar categoría</a>
     <br>
-    <a href="{{route('categories.destroy', $category)}}">Eliminar categoria</a>
+    <form action="{{route('categories.destroy', $category)}}" method="POST">
+        @csrf
+        @method("DELETE")
+        <button type="submit">Eliminar categoría</button>
+    </form>
 @endsection
