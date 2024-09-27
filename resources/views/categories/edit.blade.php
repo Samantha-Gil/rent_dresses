@@ -8,7 +8,13 @@
         <label>
             Nombre:<br>
             <input type="text" name="name" value="{{old('name', $category->name)}}">
-        </label><br>
+        </label>
+        @error('name')
+            <br>
+            <span>{{$message}}</span>
+            <br>
+        @enderror
+        <br>
         <label>
             Slug:<br>
             <input type="text" readonly name="slug" required value="{{$category->slug}}">
@@ -16,7 +22,13 @@
         <label>
             Descripción:<br>
             <textarea name="description" rows="5">{{old('description', $category->description)}}</textarea>
-        </label><br>
+        </label>
+        @error('description')
+            <br>
+            <span>{{$message}}</span>
+            <br>
+        @enderror
+        <br>
         <button type="submit">Modificar</button>
     </form>
     <a href="{{route('categories.index')}}">Volver a categorias</a>

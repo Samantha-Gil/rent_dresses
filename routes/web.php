@@ -21,13 +21,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::controller(CustomerController::class)->group(function(){
-    Route::get('customers', 'index');
-    Route::get('customers/create', 'create');
-    Route::post('customers', 'store');
-    Route::get('customers/{id}', 'show');
-    Route::get('customers/{id}/edit', 'edit');
-    Route::put('customers/{id}', 'update');
-    Route::delete('customers/{id}', 'destroy');
+    Route::get('customers', 'index')->name('customers.index');
+    Route::get('customers/create', 'create')->name('customers.create');
+    Route::post('customers', 'store')->name('customers.store');
+    Route::get('customers/{customer}', 'show')->name('customers.show');
+    Route::get('customers/{customer}/edit', 'edit')->name('customers.edit');
+    Route::put('customers/{customer}', 'update')->name('customers.update');
+    Route::delete('customers/{customer}', 'destroy')->name('customers.destroy');
 });
 
 Route::get('categories', [CategoryController::class, 'index'])->name('categories.index');

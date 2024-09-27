@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\Customer\UpdateRequest;
+use App\Http\Requests\Customer\StoreRequest;
+use App\Models\Customer;
+use Exception;
 
 class CustomerController extends Controller
 {
@@ -11,7 +14,8 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        $customers = Customer::all();
+        return view('customers.index', compact('customers'));       
     }
 
     /**
@@ -19,37 +23,41 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        return view('customers.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        $customer = Customer::create($request->validated());
+        if (!$customer->exists){
+            throw new Exception('The customer was created but does not exists');
+        }
+        return redirect()->route('customers.index', $customer);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Customer $customer)
     {
-        //
+        return view ('customers.show', compact('customer'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Customer $customer)
     {
-        //
+        return view('customers.edit', compact('customer'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateRequest $request, string $id)
     {
         //
     }

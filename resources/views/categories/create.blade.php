@@ -7,11 +7,23 @@
         <label>
             Nombre:<br>
             <input type="text" name="name" value="{{old('name')}}">
-        </label><br>
+        </label>
+        @error('name')
+            <br>
+            <span>{{$message}}</span>
+            <br>
+        @enderror
+        <br>
         <label>
             Descripción:<br>
             <textarea name="description" rows="5">{{old('description')}}</textarea>
-        </label><br>
+        </label>
+        @error('description')
+            <br>
+            <span>{{$message}}</span>
+            <br>
+        @enderror
+        <br>
         <button type="submit">Registrar</button>
     </form>
     <a href="{{route('categories.index')}}">Volver a categorias</a>
