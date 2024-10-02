@@ -17,7 +17,7 @@
         <br>
         <label>
             Slug:<br>
-            <input type="text" readonly name="slug" required value="{{$category->slug}}">
+            <input type="text" disabled name="slug" required value="{{$category->slug}}">
         </label><br>
         <label>
             Descripción:<br>

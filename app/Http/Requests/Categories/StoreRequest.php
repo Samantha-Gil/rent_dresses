@@ -4,6 +4,7 @@ namespace App\Http\Requests\Categories;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
+
 class StoreRequest extends FormRequest
 {
     /**
@@ -27,11 +28,11 @@ class StoreRequest extends FormRequest
             'description' => "required|string|min:10"
         ];
     }
+
     protected function prepareForValidation()
-    { 
+    {
         $this->merge([ //Add or modify data
             'slug' => Str::slug($this->name),
         ]);
-        
     }
 }

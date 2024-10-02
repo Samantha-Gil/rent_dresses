@@ -14,13 +14,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        try{
-            $categories = Category::all();
-            return view('categories.index', compact('categories'));
+        $categories = Category::all();
 
-        }catch(Exception $e){
-            return redirect()->route('categories.index')->with('error', 'Error displaying categories.');
-        }   
+        return view('categories.index', compact('categories'));
     }
 
     /**
@@ -28,12 +24,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        try{
-            return view('categories.create');
-
-        }catch(Exception $e){
-            return redirect()->route('categories.index')->with('error', 'Error displaying form.');
-        } 
+        return view('categories.create');
     }
 
     /**
@@ -41,14 +32,12 @@ class CategoryController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        try{
+        try {
             $category = Category::create($request->validated());
-            if (!$category->exists) {
-                throw new Exception('The category was created but does not exists');
-            }
-            return redirect()->route('categories.show', $category);
 
-        }catch(Exception $e){
+            return redirect()->route('categories.show', $category)->with('success', 'Created category.');
+
+        } catch (Exception $e) {
             return redirect()->route('categories.create')->with('error', 'Error creating category: ' . $e->getMessage());
         }
     }
@@ -58,10 +47,10 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        try{
+        try {
             return view('categories.show', compact('category'));
 
-        }catch(Exception $e){
+        } catch (Exception $e) {
             return redirect()->route('categories.index')->with('error', 'Error displaying category.');
         }
     }
@@ -71,12 +60,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        try{
-            return view('categories.edit', compact('category'));
-
-        }catch(Exception $e){
-            return redirect()->route('categories.index')->with('error', 'Error displaying form.');
-        }
+        return view('categories.edit', compact('category'));
     }
 
     /**
@@ -84,11 +68,12 @@ class CategoryController extends Controller
      */
     public function update(UpdateRequest $request, Category $category)
     {
-        try{
+        try {
             $category->update($request->validated());
-            return redirect()->route('categories.show', $category);
 
-        }catch(Exception $e){
+            return redirect()->route('categories.show', $category)->with('success', 'Updated category.');
+
+        } catch (Exception $e) {
             return redirect()->route('categories.edit', $category)->with('error', 'Error updating category: ' . $e->getMessage());
         }
     }
@@ -98,11 +83,12 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        try{
+        try {
             $category->delete();
-            return redirect()->route('categories.index')->with('success', 'Deleted category.');
 
-        }catch(Exception $e){
+            return redirect()->route('categories.index')->with('success', 'Deleted category.');
+            
+        } catch (Exception $e) {
             return redirect()->route('categories.index')->with('error', 'Error deleting category: ' . $e->getMessage());
         }
     }

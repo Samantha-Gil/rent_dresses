@@ -28,11 +28,11 @@ class UpdateRequest extends FormRequest
             'description' => "required|string|min:10"
         ];
     }
+
     protected function prepareForValidation()
-    { 
+    {
         $this->merge([ //Add or modify data
             'slug' => Str::slug($this->name),
         ]);
-        
     }
 }

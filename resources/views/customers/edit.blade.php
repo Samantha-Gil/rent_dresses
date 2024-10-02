@@ -21,4 +21,3 @@
     </form>
     <a href="{{route('customers.index')}}">Ver lista de clientes</a>
 @endsection
-
