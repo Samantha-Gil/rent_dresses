@@ -14,9 +14,13 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        try {
+            $categories = Category::all();
 
-        return view('categories.index', compact('categories'));
+            return view('categories.index', compact('categories'));
+        } catch (Exception $e) {
+            return redirect()->route('categories.index')->with('error', 'Error displaying categories.');
+        }
     }
 
     /**
@@ -36,7 +40,6 @@ class CategoryController extends Controller
             $category = Category::create($request->validated());
 
             return redirect()->route('categories.show', $category)->with('success', 'Created category.');
-
         } catch (Exception $e) {
             return redirect()->route('categories.create')->with('error', 'Error creating category: ' . $e->getMessage());
         }
@@ -47,12 +50,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        try {
-            return view('categories.show', compact('category'));
-
-        } catch (Exception $e) {
-            return redirect()->route('categories.index')->with('error', 'Error displaying category.');
-        }
+        return view('categories.show', compact('category'));
     }
 
     /**
@@ -72,7 +70,6 @@ class CategoryController extends Controller
             $category->update($request->validated());
 
             return redirect()->route('categories.show', $category)->with('success', 'Updated category.');
-
         } catch (Exception $e) {
             return redirect()->route('categories.edit', $category)->with('error', 'Error updating category: ' . $e->getMessage());
         }
@@ -87,7 +84,6 @@ class CategoryController extends Controller
             $category->delete();
 
             return redirect()->route('categories.index')->with('success', 'Deleted category.');
-            
         } catch (Exception $e) {
             return redirect()->route('categories.index')->with('error', 'Error deleting category: ' . $e->getMessage());
         }
