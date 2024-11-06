@@ -14,11 +14,5 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         Category::factory(3)->create();
-        /** 
-        *$customer = new Category();
-        *$customer->name = "Gala";
-        *$customer->description = "Vestido para reuniones formales";
-        *$customer->save();
-        */
     }
 }
