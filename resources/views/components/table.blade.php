@@ -3,6 +3,18 @@
         <thead>
             <tr>
                 <th>Nombre</th>
+                @if ($hasDescription ?? false)
+                    <th>Descripción</th>
+                @endif
+                @if ($hasPrice ?? false)
+                    <th>Precio</th>
+                @endif
+                @if ($hasCategory ?? false)
+                    <th>Categoría</th>
+                @endif
+                @if ($hasDressname ?? false)
+                    <th>Vestido</th>
+                @endif
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -11,8 +23,21 @@
                 <tr>
                 @if ($item->customer)
                     <td>{{$item->customer->name}}</td>
+                    <td>{{$item->dress->name}}</td>
                 @elseif ($item->name)
                     <td>{{$item->name}}</td>
+                @endif
+
+                @if ($hasDescription ?? false)
+                    <td>{{$item->description}}</td>
+                @endif
+
+                @if ($hasPrice ?? false)
+                    <td>${{$item->price}}</td>
+                @endif
+
+                @if ($hasCategory ?? false)
+                    <td>{{$item->category->name}}</td>
                 @endif
                     <td class="actions">
                         <a href="{{route($showRoute, $item->id)}}" class="btn-crud">👀</a>

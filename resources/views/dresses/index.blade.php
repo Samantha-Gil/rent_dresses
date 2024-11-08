@@ -11,5 +11,7 @@
     'showRoute' => 'dresses.show',
     'editRoute' => 'dresses.edit',
     'deleteRoute' => 'dresses.destroy',
+    'hasPrice' => true,
+    'hasCategory' => true
 ])
 @endsection

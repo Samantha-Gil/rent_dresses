@@ -11,5 +11,6 @@
     'showRoute' => 'rents.show',
     'editRoute' => 'rents.edit',
     'deleteRoute' => 'rents.destroy',
+    'hasDressname' => true
 ])
 @endsection

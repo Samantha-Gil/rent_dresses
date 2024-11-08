@@ -10,6 +10,7 @@
     'items' => $categories,         
     'showRoute' => 'categories.show',
     'editRoute' => 'categories.edit', 
-    'deleteRoute' => 'categories.destroy'
+    'deleteRoute' => 'categories.destroy',
+    'hasDescription' => true
 ])
 @endsection
