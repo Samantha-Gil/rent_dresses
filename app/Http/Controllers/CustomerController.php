@@ -20,7 +20,7 @@ class CustomerController extends Controller
             return view('customers.index', compact('customers'));
         }catch(Exception $e){
             return redirect()->route('categories.index')->with('error', 'Error displaying categories.');
-        }       
+        }
     }
 
     /**

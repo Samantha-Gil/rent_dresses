@@ -82,7 +82,7 @@ class RentController extends Controller
             return redirect()->route('rents.show', $rent)->with('success', 'Updated rent.');
         }catch(Exception $e){
             return redirect()->route('rents.edit', $rent)->with('error', 'Error updating rent: ' . $e->getMessage());
-        }    
+        }
     }
 
     /**

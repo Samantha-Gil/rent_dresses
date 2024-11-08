@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Customer;
+namespace App\Http\Requests\Categories;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 
-class UpdateRequest extends FormRequest
+class StoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,8 +24,15 @@ class UpdateRequest extends FormRequest
     {
         return [
             'name' => "required|string|max:255",
-            'surname' => "required|string|max:255",
-            'email' => "required|email|unique:customers,email," . $this->route('customer')->id . "|max:255",
+            'slug' => "required_with:name|string|max:255|unique:categories,slug",
+            'description' => "required|string|min:10"
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([ //Add or modify data
+            'slug' => Str::slug($this->name),
+        ]);
     }
 }

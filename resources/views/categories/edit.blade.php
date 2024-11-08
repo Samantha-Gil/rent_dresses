@@ -13,7 +13,7 @@
             'type' => 'text',
             'value' => old('name', $category->name)
         ])
-
+        
         <label>
             Slug:<br>
             <input type="text" disabled name="slug" required value="{{$category->slug}}">
