@@ -206,3 +206,8 @@ a:hover {
     text-decoration: underline;
 }
 
+/*Slug*/
+input[disabled]{
+    background-color: white;
+    color: black;
+}

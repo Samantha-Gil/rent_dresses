@@ -33,7 +33,7 @@ class UpdateRequest extends FormRequest
 
     protected function prepareForValidation()
     {
-        $this->merge([ 
+        $this->merge([
             'slug' => Str::slug($this->name),
         ]);
     }

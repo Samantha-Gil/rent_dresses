@@ -16,11 +16,12 @@ class RentController extends Controller
      */
     public function index()
     {
-        try{
+        try {
+
             $rents = Rent::with('customer')->get();
 
             return view('rents.index', compact('rents'));
-        }catch(Exception $e){
+        } catch (Exception $e) {
             return redirect()->route('rents.index')->with('error', "Error displaying rents.");
         }
     }
@@ -30,10 +31,14 @@ class RentController extends Controller
      */
     public function create()
     {
-        $customers = Customer::all();
-        $dresses = Dress::all();
+        try {
+            $customers = Customer::all();
+            $dresses = Dress::all();
 
-        return view ('rents.create', compact('customers','dresses'));
+            return view('rents.create', compact('customers', 'dresses'));
+        } catch (Exception $e) {
+            return redirect()->route('rents.index')->with('error', 'Error getting data: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -41,11 +46,11 @@ class RentController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        try{
+        try {
             $rent = Rent::create($request->validated());
 
-            return redirect()->route('rents.show', $rent)->with('success','Created rent.');
-        }catch(Exception $e){
+            return redirect()->route('rents.show', $rent)->with('success', 'Created rent.');
+        } catch (Exception $e) {
             return redirect()->route('rents.create')->with('error', 'Error creating rent: ' . $e->getMessage());
         }
     }
@@ -55,8 +60,6 @@ class RentController extends Controller
      */
     public function show(Rent $rent)
     {
-        $rent->load('customer', 'dress');
-        
         return view('rents.show', compact('rent'));
     }
 
@@ -65,10 +68,14 @@ class RentController extends Controller
      */
     public function edit(Rent $rent)
     {
-        $customers = Customer::all();
-        $dresses = Dress::all();
+        try {
+            $customers = Customer::all();
+            $dresses = Dress::all();
 
-        return view ('rents.edit', compact('rent', 'customers', 'dresses'));
+            return view('rents.edit', compact('rent', 'customers', 'dresses'));
+        } catch (Exception $e) {
+            return redirect()->route('rents.index')->with('error', 'Error getting data to update: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -76,11 +83,11 @@ class RentController extends Controller
      */
     public function update(UpdateRequest $request, Rent $rent)
     {
-        try{
+        try {
             $rent->update($request->validated());
 
             return redirect()->route('rents.show', $rent)->with('success', 'Updated rent.');
-        }catch(Exception $e){
+        } catch (Exception $e) {
             return redirect()->route('rents.edit', $rent)->with('error', 'Error updating rent: ' . $e->getMessage());
         }
     }

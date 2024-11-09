@@ -54,11 +54,11 @@
                                         ¿Estás seguro de que deseas eliminar este registro?
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                                        <form action="{{route($deleteRoute, $item->id)}}" method="POST" style="display: inline;">
+                                        <button type="button" class="btn btn-secondary mt-3" data-bs-dismiss="modal">Cancelar</button>
+                                        <form action="{{route($deleteRoute, $item->id)}}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Si</button>
+                                            <button type="submit" class="btn btn-danger">Aceptar</button>
                                         </form>
                                     </div>
                                 </div>

@@ -25,7 +25,7 @@ class StoreRequest extends FormRequest
             'customer_id' => 'required|exists:customers,id',
             'dress_id' => 'required|exists:dresses,id',
             'amount' => 'required|numeric|min:0|max:999999.99',
-            'start_date' => 'required|date',
+            'start_date' => 'required|date|after_or_equal:today',
             'end_date' => 'required|date|after_or_equal:start_date'
         ];
     }

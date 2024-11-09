@@ -10,15 +10,20 @@ use Exception;
 class CustomerController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource.F
      */
     public function index()
     {
-        try{
-            $customers = Customer::all();
-            
+        try {
+            $customers = Customer::all()->map(function ($customer) {
+                return [
+                    'full_name' => $customer->name . ' ' . $customer->surname,
+                    'email' => $customer->email,
+                ];
+            });
+
             return view('customers.index', compact('customers'));
-        }catch(Exception $e){
+        } catch (Exception $e) {
             return redirect()->route('categories.index')->with('error', 'Error displaying categories.');
         }
     }
@@ -36,11 +41,11 @@ class CustomerController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        try{
+        try {
             $customer = Customer::create($request->validated());
 
             return redirect()->route('customers.show', $customer)->with('success', 'Registered customer.');
-        }catch(Exception $e){
+        } catch (Exception $e) {
             return redirect()->route('customers.create')->with('error', 'Error registering customer: ' . $e->getMessage());
         }
     }
@@ -50,7 +55,7 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        return view ('customers.show', compact('customer'));
+        return view('customers.show', compact('customer'));
     }
 
     /**
@@ -66,11 +71,11 @@ class CustomerController extends Controller
      */
     public function update(UpdateRequest $request, Customer $customer)
     {
-        try{
+        try {
             $customer->update($request->validated());
 
             return redirect()->route('customers.show', $customer)->with('success', 'Updated customer.');
-        }catch(Exception $e){
+        } catch (Exception $e) {
             return redirect()->route('customers.edit', $customer)->with('error', 'Error updating customer: ' . $e->getMessage());
         }
     }
@@ -80,11 +85,11 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        try{
+        try {
             $customer->delete();
 
             return redirect()->route('customers.index')->with('success', 'Deleted customer.');
-        }catch(Exception $e){
+        } catch (Exception $e) {
             return redirect()->route('customers.index')->with('error', 'Error deleting customer: ' . $e->getMessage());
         }
     }

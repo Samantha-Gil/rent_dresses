@@ -15,11 +15,17 @@ class DressController extends Controller
      */
     public function index()
     {
-        try{
-            $dresses = Dress::all();
+        try {
+            $dresses = Dress::all()->map(function ($dress) {
+                return [
+                    'name' => $dress->name,
+                    'description' => $dress->description,
+                    'price' => $dress->price
+                ];
+            });
 
             return view('dresses.index', compact('dresses'));
-        }catch(Exception $e){
+        } catch (Exception $e) {
             return redirect()->route('dresses.index')->with('error', 'Error displaying dresses.');
         }
     }
@@ -29,9 +35,13 @@ class DressController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
+        try {
+            $categories = Category::all();
 
-        return view('dresses.create', compact('categories'));
+            return view('dresses.create', compact('categories'));
+        } catch (Exception $e) {
+            return redirect()->route('dresses.index')->with('error', 'Error getting data dress: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -39,11 +49,11 @@ class DressController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        try{
+        try {
             $dress = Dress::create($request->validated());
 
             return redirect()->route('dresses.show', $dress)->with('success', 'Created dress.');
-        }catch(Exception $e){
+        } catch (Exception $e) {
             return redirect()->route('dresses.create')->with('error', 'Error creating dress: ' . $e->getMessage());
         }
     }
@@ -53,8 +63,6 @@ class DressController extends Controller
      */
     public function show(Dress $dress)
     {
-        $dress->load('category');
-
         return view('dresses.show', compact('dress'));
     }
 
@@ -63,9 +71,13 @@ class DressController extends Controller
      */
     public function edit(Dress $dress)
     {
-        $categories = Category::all();
+        try {
+            $categories = Category::all();
 
-        return view('dresses.edit', compact('dress', 'categories'));
+            return view('dresses.edit', compact('dress', 'categories'));
+        } catch (Exception $e) {
+            return redirect()->route('dresses.index')->with('error', 'Error getting data to update dress: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -73,11 +85,11 @@ class DressController extends Controller
      */
     public function update(UpdateRequest $request, Dress $dress)
     {
-        try{
+        try {
             $dress->update($request->validated());
 
             return redirect()->route('dresses.show', $dress)->with('success', 'Updated dress.');
-        }catch(Exception $e){
+        } catch (Exception $e) {
             return redirect()->route('dresses.edit', $dress)->with('error', 'Error updating dress: ' . $e->getMessage());
         }
     }
