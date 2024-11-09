@@ -1,35 +1,38 @@
 @extends('layouts.plantilla')
-@section('title', 'Modificar categoria')
+
+@section('title', 'Actualizar categoria')
+
+@section('hide_header', true)
+
 @section('content')
-    <h1>Modificar categoría</h1>
-    <form action="{{route('categories.update', $category)}}" method="POST">
-        @csrf
-        @method("PUT")
-        <label>
-            Nombre:<br>
-            <input type="text" name="name" value="{{old('name', $category->name)}}">
-        </label>
-        @error('name')
-            <br>
-            <span>{{$message}}</span>
-            <br>
-        @enderror
-        <br>
-        <label>
-            Slug:<br>
-            <input type="text" disabled name="slug" required value="{{$category->slug}}">
-        </label><br>
-        <label>
-            Descripción:<br>
-            <textarea name="description" rows="5">{{old('description', $category->description)}}</textarea>
-        </label>
-        @error('description')
-            <br>
-            <span>{{$message}}</span>
-            <br>
-        @enderror
-        <br>
-        <button type="submit">Modificar</button>
-    </form>
-    <a href="{{route('categories.index')}}">Volver a categorias</a>
+    <div class="form-create">
+        <h1>Actualizar categoría</h1>
+        <form action="{{ route('categories.update', $category) }}" method="POST" class="form-container">
+            @csrf
+            @method('PUT')
+            @include('components.form', [
+                'name' => 'name',
+                'label' => 'Nombre',
+                'type' => 'text',
+                'value' => old('name', $category->name),
+            ])
+
+            <label>
+                Slug:<br>
+                <input type="text" disabled name="slug" required value="{{ $category->slug }}">
+            </label><br>
+
+            @include('components.form', [
+                'name' => 'description',
+                'label' => 'Descripción',
+                'type' => 'textarea',
+                'rows' => 5,
+                'value' => old('description', $category->description),
+            ])
+
+            <button type="submit">Actualizar</button>
+        </form>
+
+        <a href="{{ route('categories.index') }}">Volver a categorias</a>
+    </div>
 @endsection

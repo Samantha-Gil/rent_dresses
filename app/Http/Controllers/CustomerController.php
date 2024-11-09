@@ -10,12 +10,22 @@ use Exception;
 class CustomerController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource.F
      */
     public function index()
     {
-        $customers = Customer::all();
-        return view('customers.index', compact('customers'));       
+        try {
+            $customers = Customer::all()->map(function ($customer) {
+                return [
+                    'full_name' => $customer->name . ' ' . $customer->surname,
+                    'email' => $customer->email,
+                ];
+            });
+
+            return view('customers.index', compact('customers'));
+        } catch (Exception $e) {
+            return redirect()->route('categories.index')->with('error', 'Error displaying categories.');
+        }
     }
 
     /**
@@ -31,11 +41,13 @@ class CustomerController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $customer = Customer::create($request->validated());
-        if (!$customer->exists){
-            throw new Exception('The customer was created but does not exists');
+        try {
+            $customer = Customer::create($request->validated());
+
+            return redirect()->route('customers.show', $customer)->with('success', 'Registered customer.');
+        } catch (Exception $e) {
+            return redirect()->route('customers.create')->with('error', 'Error registering customer: ' . $e->getMessage());
         }
-        return redirect()->route('customers.index', $customer);
     }
 
     /**
@@ -43,7 +55,7 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        return view ('customers.show', compact('customer'));
+        return view('customers.show', compact('customer'));
     }
 
     /**
@@ -57,16 +69,28 @@ class CustomerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateRequest $request, string $id)
+    public function update(UpdateRequest $request, Customer $customer)
     {
-        //
+        try {
+            $customer->update($request->validated());
+
+            return redirect()->route('customers.show', $customer)->with('success', 'Updated customer.');
+        } catch (Exception $e) {
+            return redirect()->route('customers.edit', $customer)->with('error', 'Error updating customer: ' . $e->getMessage());
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Customer $customer)
     {
-        //
+        try {
+            $customer->delete();
+
+            return redirect()->route('customers.index')->with('success', 'Deleted customer.');
+        } catch (Exception $e) {
+            return redirect()->route('customers.index')->with('error', 'Error deleting customer: ' . $e->getMessage());
+        }
     }
 }
