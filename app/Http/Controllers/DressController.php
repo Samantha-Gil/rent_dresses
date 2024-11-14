@@ -18,9 +18,10 @@ class DressController extends Controller
         try {
             $dresses = Dress::all()->map(function ($dress) {
                 return [
-                    'name' => $dress->name,
-                    'description' => $dress->description,
-                    'price' => $dress->price
+                    'id' => $dress->id,
+                    'Nombre' => $dress->name,
+                    'Descripción' => $dress->description,
+                    'Precio' => $dress->price
                 ];
             });
 

@@ -17,8 +17,13 @@ class RentController extends Controller
     public function index()
     {
         try {
-
-            $rents = Rent::with('customer')->get();
+            $rents = Rent::with(['customer', 'dress'])->get()->map(function ($rent) {
+                return [
+                    'id' => $rent->id,
+                    'Cliente' => $rent->customer->name,
+                    'Vestido' => $rent->dress->name,
+                ];
+            });
 
             return view('rents.index', compact('rents'));
         } catch (Exception $e) {

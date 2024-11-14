@@ -17,14 +17,15 @@ class CustomerController extends Controller
         try {
             $customers = Customer::all()->map(function ($customer) {
                 return [
-                    'full_name' => $customer->name . ' ' . $customer->surname,
-                    'email' => $customer->email,
+                    'id' => $customer->id,
+                    'Nombre' => $customer->name . ' ' . $customer->surname,
+                    'Correo' => $customer->email,
                 ];
             });
 
             return view('customers.index', compact('customers'));
         } catch (Exception $e) {
-            return redirect()->route('categories.index')->with('error', 'Error displaying categories.');
+            return redirect()->route('categories.index')->with('error', 'Error displaying customers.');
         }
     }
 
