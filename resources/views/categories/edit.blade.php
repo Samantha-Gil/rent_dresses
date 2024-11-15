@@ -17,9 +17,9 @@
                 'value' => old('name', $category->name),
             ])
 
-            <label>
-                Slug:<br>
-                <input type="text" disabled name="slug" required value="{{ $category->slug }}">
+            <label class="w-100">
+                Slug:
+                <input class="form-control bg-white text-dark" type="text" disabled name="slug" required value="{{ $category->slug }}">
             </label><br>
 
             @include('components.form', [

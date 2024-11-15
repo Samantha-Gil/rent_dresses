@@ -33,9 +33,9 @@
                 'value' => old('name', $dress->name),
             ])
 
-            <label>
-                Slug:<br>
-                <input type="text" disabled name="slug" value="{{ $dress->slug }}">
+            <label class="w-100">
+                Slug:
+                <input class="form-control bg-white text-dark" type="text" disabled name="slug" value="{{ $dress->slug }}">
             </label><br>
 
             @include('components.form', [
