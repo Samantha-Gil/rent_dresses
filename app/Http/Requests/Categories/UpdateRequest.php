@@ -23,9 +23,9 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => "required|string|max:255",
-            'slug' => "required_with:name|string|max:255|unique:categories,slug," . $this->route('category')->id,
-            'description' => "required|string|min:10"
+            'name' => 'required|string|max:255',
+            'slug' => 'required_with:name|string|max:255|unique:categories,slug,' . $this->route('category')->id,
+            'description' => 'required|string|min:10'
         ];
     }
 

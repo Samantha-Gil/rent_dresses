@@ -1,23 +1,39 @@
 @extends('layouts.plantilla')
-@section('title', 'Modificar cliente')
+
+@section('title', 'Actualizar cliente')
+
+@section('hide_header', true)
+
 @section('content')
-    <h1>Modificar cliente</h1>
-    <form action="{{route('customers.update', $customer)}}" method="POST">
-        @csrf
-        @method("PUT")
-        <label>
-            Nombre:<br>
-            <input type="text" name="name" value="{{old('name', $customer->name)}}">
-        </label><br>
-        <label>
-            Apellido:<br>
-            <input type="text" name="surname" value="{{old('surname', $customer->surname)}}">
-        </label><br>
-        <label>
-            Correo electrónico:<br>
-            <input type="email" name="email" value="{{old('email', $customer->email)}}">
-        </label><br>
-        <button type="submit">Modificar</button>
-    </form>
-    <a href="{{route('customers.index')}}">Ver lista de clientes</a>
+    <div class="form-create">
+        <h1>Actualizar cliente</h1>
+        <form action="{{ route('customers.update', $customer) }}" method="POST" class="form-container">
+            @csrf
+            @method('PUT')
+            @include('components.form', [
+                'name' => 'name',
+                'label' => 'Nombre',
+                'type' => 'text',
+                'value' => old('name', $customer->name),
+            ])
+
+            @include('components.form', [
+                'name' => 'surname',
+                'label' => 'Apellido',
+                'type' => 'text',
+                'value' => old('surname', $customer->surname),
+            ])
+
+            @include('components.form', [
+                'name' => 'email',
+                'label' => 'Correo electrónico',
+                'type' => 'email',
+                'value' => old('email', $customer->email),
+            ])
+
+            <button type="submit">Actualizar</button>
+        </form>
+
+        <a href="{{ route('customers.index') }}">Ver lista de clientes</a>
+    </div>
 @endsection

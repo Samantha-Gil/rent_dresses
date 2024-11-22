@@ -1,13 +1,18 @@
 @extends('layouts.plantilla')
+
 @section('title', 'Categorias')
+
 @section('content')
-    <h1>Categorias de vestidos</h1>
-    <a href="{{route('categories.create')}}">Crear categoria</a>
-    <ul>
-        @foreach ($categories as $category)
-            <li>
-                <a href="{{route('categories.show', $category->id)}}">{{$category->name}}</a>
-            </li>
-        @endforeach
-    </ul>
+    <div class="d-flex flex-column flex-md-row align-items-center justify-content-between mb-4 header-table">
+        <h3>Categorías de vestidos</h3>
+        <a href="{{ route('categories.create') }}" class="btn-create">Crear categoría</a>
+    </div>
+
+    @include('components.table', [
+        'items' => $categories,
+        'showRoute' => 'categories.show',
+        'editRoute' => 'categories.edit',
+        'deleteRoute' => 'categories.destroy',
+        'hasDescription' => true,
+    ])
 @endsection

@@ -15,7 +15,13 @@ class CategoryController extends Controller
     public function index()
     {
         try {
-            $categories = Category::all();
+            $categories = Category::all()->map(function ($category) {
+                return [
+                    'id' => $category->id,
+                    'Nombre' => $category->name,
+                    'Descripción' => $category->description,
+                ];
+            });
 
             return view('categories.index', compact('categories'));
         } catch (Exception $e) {

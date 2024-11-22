@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Requests\Categories;
+namespace App\Http\Requests\Rent;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Str;
 
 class StoreRequest extends FormRequest
 {
@@ -23,16 +22,11 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
-            'slug' => 'required_with:name|string|max:255|unique:categories,slug',
-            'description' => 'required|string|min:10'
+            'customer_id' => 'required|exists:customers,id',
+            'dress_id' => 'required|exists:dresses,id',
+            'amount' => 'required|numeric|min:0|max:999999.99',
+            'start_date' => 'required|date|after_or_equal:today',
+            'end_date' => 'required|date|after_or_equal:start_date'
         ];
-    }
-
-    protected function prepareForValidation()
-    {
-        $this->merge([ //Add or modify data
-            'slug' => Str::slug($this->name),
-        ]);
     }
 }

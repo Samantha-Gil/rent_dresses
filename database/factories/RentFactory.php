@@ -21,7 +21,9 @@ class RentFactory extends Factory
         return [
             'customer_id'=> Customer::inRandomOrder()->first()->id,
             'dress_id'=> Dress::inRandomOrder()->first()->id,
-            'amount' =>fake()->randomFloat(2, 100, 999.99)
+            'amount' =>fake()->randomFloat(2, 100, 999.99),
+            'start_date' => $startDate = $this->faker->date(),
+            'end_date' => $this->faker->dateTimeBetween($startDate, '+31 days'),
         ];
     }
 }

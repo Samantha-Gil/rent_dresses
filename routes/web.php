@@ -1,9 +1,9 @@
 <?php
+
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DressController;
 use App\Http\Controllers\RentController;
-use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,9 +17,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/', 'home')->name('home');
+
 Route::controller(CustomerController::class)->group(function(){
     Route::get('customers', 'index')->name('customers.index');
     Route::get('customers/create', 'create')->name('customers.create');
@@ -40,4 +39,3 @@ Route::delete('categories/{category}', [CategoryController::class, 'destroy'])->
 
 Route::resource('dresses', DressController::class);
 Route::resource('rents', RentController::class);
-Route::resource('payments', PaymentController::class);

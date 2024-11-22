@@ -18,6 +18,8 @@ return new class extends Migration
             $table->foreignIdFor(Customer::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignIdFor(Dress::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->decimal('amount', 8, 2);
+            $table->date('start_date');
+            $table->date('end_date');
             $table->timestamps();
         });
     }
