@@ -2,8 +2,6 @@
 
 @section('title', 'Actualizar categoria')
 
-@section('hide_header', true)
-
 @section('content')
     <div class="form-create">
         <h1>Actualizar categoría</h1>
@@ -19,7 +17,8 @@
 
             <label class="w-100">
                 Slug:
-                <input class="form-control bg-white text-dark" type="text" disabled name="slug" required value="{{ $category->slug }}">
+                <input class="form-control bg-white text-dark" type="text" disabled name="slug" required
+                    value="{{ $category->slug }}">
             </label><br>
 
             @include('components.form', [

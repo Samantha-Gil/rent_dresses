@@ -2,8 +2,6 @@
 
 @section('title', 'Crear categoria')
 
-@section('hide_header', true)
-
 @section('content')
     <div class="form-create">
         <h1>Nueva categoría</h1>

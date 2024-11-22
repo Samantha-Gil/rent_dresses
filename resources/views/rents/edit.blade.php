@@ -2,8 +2,6 @@
 
 @section('title', 'Actualizar renta')
 
-@section('hide_header', true)
-
 @section('content')
     <div class="form-create">
         <h1>Actualizar renta</h1>

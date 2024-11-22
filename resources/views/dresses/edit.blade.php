@@ -2,8 +2,6 @@
 
 @section('title', 'Actualizar vestido')
 
-@section('hide_header', true)
-
 @section('content')
     <div class="form-create">
         <h1>Actualizar vestido</h1>
@@ -35,7 +33,8 @@
 
             <label class="w-100">
                 Slug:
-                <input class="form-control bg-white text-dark" type="text" disabled name="slug" value="{{ $dress->slug }}">
+                <input class="form-control bg-white text-dark" type="text" disabled name="slug"
+                    value="{{ $dress->slug }}">
             </label><br>
 
             @include('components.form', [

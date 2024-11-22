@@ -2,8 +2,6 @@
 
 @section('title', 'Registrar renta')
 
-@section('hide_header', true)
-
 @section('content')
     <div class="form-create">
         <h1>Registrar renta</h1>
