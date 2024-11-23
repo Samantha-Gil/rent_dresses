@@ -1,8 +1,4 @@
-@extends('layouts.plantilla')
-
-@section('title', 'Registrar renta')
-
-@section('content')
+<x-base title="Registrar renta">
     <div class="form-create">
         <h1>Registrar renta</h1>
         <form action="{{ route('rents.store') }}" method="POST" class="form-container">
@@ -64,4 +60,4 @@
 
         <a href="{{ route('rents.index') }}">Ver lista de rentas</a>
     </div>
-@endsection
+</x-base>

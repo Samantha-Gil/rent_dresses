@@ -1,8 +1,4 @@
-@extends('layouts.plantilla')
-
-@section('title', 'Actualizar cliente')
-
-@section('content')
+<x-base title="Actualizar cliente">
     <div class="form-create">
         <h1>Actualizar cliente</h1>
         <form action="{{ route('customers.update', $customer) }}" method="POST" class="form-container">
@@ -34,4 +30,4 @@
 
         <a href="{{ route('customers.index') }}">Ver lista de clientes</a>
     </div>
-@endsection
+</x-base>

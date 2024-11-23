@@ -1,10 +1,6 @@
-@extends('layouts.plantilla')
-
-@section('title', 'Home')
-
-@section('content')
+<x-base title="Home">
     <x-header />
-    
+
     <x-navbar />
     <div class="container my-5">
         <div class="row g-3">
@@ -20,4 +16,4 @@
                 description="Vestido casual color blanco ideal para el día con mangas de encaje." />
         </div>
     </div>
-@endsection
+</x-base>

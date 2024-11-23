@@ -1,8 +1,4 @@
-@extends('layouts.plantilla')
-
-@section('title', 'Vestidos')
-
-@section('content')
+<x-base title="Vestidos">
     <x-header />
 
     <x-navbar />
@@ -18,4 +14,4 @@
         'editRoute' => 'dresses.edit',
         'deleteRoute' => 'dresses.destroy',
     ])
-@endsection
+</x-base>

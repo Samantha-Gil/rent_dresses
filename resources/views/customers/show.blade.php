@@ -1,8 +1,4 @@
-@extends('layouts.plantilla')
-
-@section('title', 'Cliente: ' . $customer->name)
-
-@section('content')
+<x-base title="Cliente: {{ $customer->name }}">
     <x-header />
 
     <div class="container">
@@ -24,4 +20,4 @@
             <a href="{{ route('customers.index') }}" class="back-link">Ver lista de clientes</a>
         </div>
     </div>
-@endsection
+</x-base>

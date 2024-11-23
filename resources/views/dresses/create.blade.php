@@ -1,8 +1,4 @@
-@extends('layouts.plantilla')
-
-@section('title', 'Registrar vestido')
-
-@section('content')
+<x-base title="Registrar vestido">
     <div class="form-create">
         <h1>Nuevo vestido</h1>
         <form action="{{ route('dresses.store') }}" method="POST" class="form-container">
@@ -39,8 +35,7 @@
             @include('components.form', [
                 'name' => 'description',
                 'label' => 'Descripción',
-                'type' => 'textarea',
-                'rows' => 5,
+                'type' => 'textarea'
             ])
 
             <button type="submit">Registrar</button>
@@ -48,4 +43,4 @@
 
         <a href="{{ route('dresses.index') }}">Ver lista de vestidos</a>
     </div>
-@endsection
+</x-base>

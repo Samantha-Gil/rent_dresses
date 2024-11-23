@@ -1,8 +1,4 @@
-@extends('layouts.plantilla')
-
-@section('title', 'Actualizar vestido')
-
-@section('content')
+<x-base title="Actualizar vestido">
     <div class="form-create">
         <h1>Actualizar vestido</h1>
         <form action="{{ route('dresses.update', $dress) }}" method="POST" class="form-container">
@@ -13,7 +9,8 @@
 
                 <select id="category_id" name="category_id" class="form-control">
                     @foreach ($categories as $category)
-                        <option value="{{ $category->id }}" {{ $category->id == $dress->category_id ? 'selected' : '' }}>
+                        <option value="{{ $category->id }}"
+                            {{ $category->id == $dress->category_id ? 'selected' : '' }}>
                             {{ $category->name }}
                         </option>
                     @endforeach
@@ -48,7 +45,6 @@
                 'name' => 'description',
                 'label' => 'Descripción',
                 'type' => 'textarea',
-                'rows' => 5,
                 'value' => old('description', $dress->description),
             ])
 
@@ -57,4 +53,4 @@
 
         <a href="{{ route('dresses.index') }}">Ver lista de vestidos</a>
     </div>
-@endsection
+</x-base>

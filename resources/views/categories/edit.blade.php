@@ -1,8 +1,4 @@
-@extends('layouts.plantilla')
-
-@section('title', 'Actualizar categoria')
-
-@section('content')
+<x-base title="Actualizar categoría">
     <div class="form-create">
         <h1>Actualizar categoría</h1>
         <form action="{{ route('categories.update', $category) }}" method="POST" class="form-container">
@@ -25,7 +21,6 @@
                 'name' => 'description',
                 'label' => 'Descripción',
                 'type' => 'textarea',
-                'rows' => 5,
                 'value' => old('description', $category->description),
             ])
 
@@ -34,4 +29,4 @@
 
         <a href="{{ route('categories.index') }}">Volver a categorias</a>
     </div>
-@endsection
+</x-base>

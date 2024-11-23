@@ -1,10 +1,6 @@
-@extends('layouts.plantilla')
-
-@section('title', 'Categoria: ' . $category->name)
-
-@section('content')
+<x-base title="Categoría: {{ $category->name }}">
     <x-header />
-    
+
     <div class="container">
         <div class="row">
             <div class="col-12 text-center mb-4">
@@ -24,4 +20,4 @@
             <a href="{{ route('categories.index') }}" class="back-link">Volver a categorías</a>
         </div>
     </div>
-@endsection
+</x-base>

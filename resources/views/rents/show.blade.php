@@ -1,8 +1,4 @@
-@extends('layouts.plantilla')
-
-@section('title', 'Renta: ' . $rent->id)
-
-@section('content')
+<x-base title="Renta {{ $rent->name }}">
     <x-header />
 
     <div class="container">
@@ -26,4 +22,4 @@
             <a href="{{ route('rents.index') }}" class="back-link">Ver lista de rentas</a>
         </div>
     </div>
-@endsection
+</x-base>
